@@ -1,8 +1,13 @@
+// Copyright 2022 Kato Shinya. All rights reserved.
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided the conditions.
+
 // ignore_for_file: implementation_imports, depend_on_referenced_packages
+
+import 'dart:io';
 
 import 'package:build_runner/src/build_script_generate/bootstrap.dart';
 import 'package:io/io.dart';
-import 'dart:io';
 
 abstract class BuildRunner {
   factory BuildRunner() => _BuildRunner();

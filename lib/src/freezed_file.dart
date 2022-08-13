@@ -5,7 +5,7 @@
 import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
-import 'package:freezer/src/freezed_resource.dart';
+import 'freezed_resource.dart';
 
 class FreezedFile {
   FreezedFile(final String filePath, final String fileName)

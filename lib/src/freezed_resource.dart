@@ -2,7 +2,7 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided the conditions.
 
-import 'package:freezer/src/extension/string_extension.dart';
+import 'extension/string_extension.dart';
 
 import 'field.dart';
 
