@@ -1,0 +1,16 @@
+{
+  "shop": {
+    "name.!required": "My Fancy Shop",
+    "product": [
+      {
+        "name": "Chocolate",
+        "price": 5.99
+      },
+      {
+        "name": "Gummy",
+        "price": 8.99
+      }
+    ],
+    "closed": false
+  }
+}

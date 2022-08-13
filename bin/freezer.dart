@@ -16,6 +16,8 @@ import 'package:freezer/src/exception/freezer_exception.dart';
 import 'package:freezer/src/freezed_file.dart';
 import 'package:freezer/src/freezed_resource.dart';
 
+final _generatedFileNames = <String>[];
+
 Future<void> main(List<String> args) async {
   final stopwatch = Stopwatch();
   stopwatch.start();
@@ -26,7 +28,7 @@ Future<void> main(List<String> args) async {
     throw FreezerException('No design files to be freezed found.');
   }
 
-  stdout.write('Reading ${designFiles.length} freezer files');
+  stdout.write('Started process for ${designFiles.length} files\n\n');
 
   for (final filePath in designFiles.keys) {
     _buildFreezedResources(
@@ -40,8 +42,7 @@ Future<void> main(List<String> args) async {
 
   stopwatch.stop();
 
-  stdout.write(
-      '✔ Generated ${designFiles.length} files in ${stopwatch.elapsed.inSeconds}.${stopwatch.elapsedMilliseconds} seconds\n');
+  _printResult(stopwatch);
 }
 
 void _buildFreezedResources(
@@ -104,9 +105,16 @@ void _buildFreezedResourceRecursively(
     }
   }
 
-  FreezedFile(_getOutputPath(filePath), fileName).write(
+  final outputDirectory = _getOutputPath(filePath);
+
+  FreezedFile(outputDirectory, fileName).write(
     FreezedResource(imports, fileName, parsedFields),
   );
+
+  _generatedFileNames
+    ..add('$outputDirectory/$fileName.dart')
+    ..add('$outputDirectory/$fileName.freezed.dart')
+    ..add('$outputDirectory/$fileName.g.dart');
 }
 
 String _getOutputPath(final String filePath) {
@@ -114,4 +122,17 @@ String _getOutputPath(final String filePath) {
       filePath.substring(0, filePath.indexOf('/design/') + '/design/'.length);
 
   return basePath.replaceFirst('design', 'lib');
+}
+
+void _printResult(final Stopwatch stopwatch) {
+  stdout.write('\n');
+  stdout.write('┏━━ Generated dart files\n');
+
+  for (final name in _generatedFileNames) {
+    stdout.write('┣ ✔ $name\n');
+  }
+
+  stdout.write(
+      '┗━━ ${_generatedFileNames.length} files in ${stopwatch.elapsed.inSeconds}.${stopwatch.elapsedMilliseconds} seconds\n');
+  stdout.write('\n');
 }
