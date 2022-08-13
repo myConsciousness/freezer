@@ -1,0 +1,14 @@
+{
+  "tweet_data": {
+    "text.!required": "Hello!",
+    "user_id": 1234567890,
+    "map_structure": {
+      "key1": "value1",
+      "key2": true
+    },
+    "list_structure": [
+      { "key1": "value1", "key2": 11111 },
+      { "key1": "value2", "key2": 2222 }
+    ]
+  }
+}

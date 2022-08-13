@@ -1,0 +1,20 @@
+name: freezer
+description: A sample command-line application.
+version: 1.0.0
+repository: https://github.com/myConsciousness/freezer
+issue_tracker: https://github.com/myConsciousness/freezer/issues
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  build_runner: ^2.2.0
+  dart_style: ^2.2.3
+  json_annotation: ^4.6.0
+  freezed_annotation: ^2.1.0
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.16.0
+  json_serializable: ^6.3.1
+  freezed: ^2.1.0+1
