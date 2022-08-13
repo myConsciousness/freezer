@@ -71,7 +71,7 @@ And you need to note following rules when you use the `freezer`.
 1. **freezer** parses files with the `.freezer.json` extension.
 2. **freezer** parses JSON files stored in the `.design` folder.
 
-So, now let's create a JSON file with the following configuration as a trial.
+So, now let's create a JSON file with the following structure as a trial.
 
 ```json
 {
