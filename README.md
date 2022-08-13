@@ -139,7 +139,7 @@ And you can see generated dart codes in the `.lib` folder like below.
 .
 ├── analysis_options.yaml
 ├── design
-│   └── test.freezer.json
+│   └── shop.freezer.json
 ├── lib
 │   ├── product.dart
 │   ├── product.freezed.dart
