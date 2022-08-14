@@ -77,10 +77,11 @@ So, now let's create a JSON file with the following structure as a trial.
 {
   "shop": {
     "name.!required": "My Fancy Shop",
-    "product": [
+    "product.!as:products": [
       {
         "name": "Chocolate",
-        "price": 5.99
+        "price": 5.99,
+        "product_type": 1
       },
       {
         "name": "Gummy",

@@ -7,7 +7,7 @@ import 'dart:io';
 
 import 'build_runner.dart';
 import 'exception/freezer_exception.dart';
-import 'files.dart';
+import 'file_utils.dart' as file;
 import 'freezed_file.dart';
 import 'freezed_object_parser.dart';
 
@@ -18,7 +18,7 @@ class Freezer {
     final stopwatch = Stopwatch();
     stopwatch.start();
 
-    final designFiles = findDesignFiles(Directory.current.path);
+    final designFiles = file.findDesignFiles(Directory.current.path);
 
     if (designFiles.isEmpty) {
       throw FreezerException('No design files to be freezed found.');
@@ -47,7 +47,7 @@ class Freezer {
   ) {
     final freezedObjects = FreezedObjectParser(
       filePath,
-      root['models']!,
+      root['models'] ?? root,
     ).execute();
 
     for (final freezedObject in freezedObjects) {
