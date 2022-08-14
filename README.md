@@ -22,11 +22,16 @@ This library provides the ability to automatically generate class objects suppor
 
 Show some ❤️ and star the repo to support the project.
 
+> **Note**</br>
+> Many of the specifications in this library are still in development. Your contributions are very welcome!
+
 ## 1.1. Motivation 💎
 
-- JSON-based model design.
+- Realize JSON-based model design.
+- Realize automatic generation of model objects from design.
 - Synchronize the design and implementation of model objects.
 - Expand the possibilities of the freezed library even more.
+- etc...
 
 ## 1.2. Getting Started 🏄
 
