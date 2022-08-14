@@ -2,44 +2,35 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided the conditions.
 
-import 'extension/string_extension.dart';
-
-import 'field.dart';
+import 'model/freezed_object.dart';
+import 'model/import_package.dart';
+import 'model/parameter.dart';
 
 abstract class FreezedResource {
-  factory FreezedResource(
-    List<String> imports,
-    String fileName,
-    List<Field> fields,
-  ) =>
-      _FreezedResource(
-        imports,
-        fileName,
-        fields,
-      );
+  factory FreezedResource(FreezedObject freezedObject) =>
+      _FreezedResource(freezedObject);
 
   String build();
 }
 
 class _FreezedResource implements FreezedResource {
-  const _FreezedResource(
-    this.imports,
-    this.fileName,
-    this.fields,
-  );
+  const _FreezedResource(this.freezedObject);
 
-  final List<String> imports;
-  final String fileName;
-  final List<Field> fields;
+  /// The freezed object to be generated
+  final FreezedObject freezedObject;
 
   @override
   String build() {
-    final className = fileName.toUpperCamelCase();
+    final fileName = freezedObject.fileName;
+    final className = freezedObject.className;
+
+    final constructorParameters =
+        _resolveConstructorParameters(freezedObject.parameters);
 
     return '''
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-${_buildImportPackages(imports)}
+${_resolveImportPackages(freezedObject.importPackages)}
 
 part '$fileName.freezed.dart';
 part '$fileName.g.dart';
@@ -47,8 +38,8 @@ part '$fileName.g.dart';
 @freezed
 class $className with _\$$className {
   const factory $className({
-    ${_buildConstructorParameters(fields)}}
-  ) = _$className;
+    $constructorParameters
+  }) = _$className;
 
   factory $className.fromJson(Map<String, Object?> json) =>
       _\$${className}FromJson(json);
@@ -56,28 +47,40 @@ class $className with _\$$className {
 ''';
   }
 
-  String _buildImportPackages(
-    final List<String> imports,
+  String _resolveImportPackages(
+    final List<ImportPackage> importPackages,
   ) =>
-      imports.map((fileName) => "import '$fileName.dart';").join();
+      importPackages.map((package) => "import '${package.name}.dart';").join();
 
-  String _buildConstructorParameters(final List<Field> fields) => fields
-      .map((e) => '${_getParameterType(e)} ${_getParameterName(e)},')
-      .join();
+  String _resolveConstructorParameters(final List<Parameter> parameters) =>
+      parameters.map((parameter) {
+        final buffer = StringBuffer();
 
-  String _getParameterType(final Field field) {
-    if (!field.name.contains('.!required')) {
-      return '${field.type}?';
-    }
+        if (parameter.hasAnnotation) {
+          buffer.write(parameter.annotation);
+          buffer.write(' ');
+        }
 
-    return 'required ${field.type}';
-  }
+        if (parameter.isRequired) {
+          buffer.write('required');
+          buffer.write(' ');
+        }
 
-  String _getParameterName(final Field field) {
-    if (!field.name.contains('.!')) {
-      return field.name.toCamelCase();
-    }
+        buffer.write(parameter.type);
 
-    return field.name.substring(0, field.name.indexOf('.!')).toCamelCase();
-  }
+        if (parameter.hasTypeVariable) {
+          buffer.write(parameter.typeVariable);
+        }
+
+        if (!parameter.isRequired) {
+          //! Make it nullable
+          buffer.write('?');
+        }
+
+        buffer.write(' ');
+        buffer.write(parameter.name);
+        buffer.write(',');
+
+        return buffer.toString();
+      }).join();
 }

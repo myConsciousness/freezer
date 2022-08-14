@@ -1,16 +1,26 @@
 {
-  "shop": {
-    "name.!required": "My Fancy Shop",
-    "product": [
-      {
-        "name": "Chocolate",
-        "price": 5.99
-      },
-      {
-        "name": "Gummy",
-        "price": 8.99
-      }
-    ],
-    "closed": false
+  "models": {
+    "shop": {
+      "name.!required": "My Fancy Shop",
+      "product.!as:products": [
+        {
+          "name": "Chocolate",
+          "price": 5.99,
+          "product_type": 1
+        },
+        {
+          "name": "Gummy",
+          "price": 8.99
+        }
+      ],
+      "closed": false
+    }
+  },
+  "enums": {
+    "product_type": {
+      "sweet": 0,
+      "fish": 1,
+      "meat": 2
+    }
   }
 }

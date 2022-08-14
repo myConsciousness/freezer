@@ -3,6 +3,9 @@
 // modification, are permitted provided the conditions.
 
 extension StringExtension on String {
+  String toSnakeCase() => replaceAllMapped(
+      RegExp(r'([A-Z])'), (match) => '_${match.group(0)!.toLowerCase()}');
+
   String toCamelCase() {
     final words = split('_');
     final camelCase = StringBuffer();

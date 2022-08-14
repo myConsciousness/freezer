@@ -53,13 +53,13 @@ Next, let's install the libraries to use the **freezer** functionality.
 **With Dart:**
 
 ```bash
-dart pub get freezer
+dart pub add freezer
 ```
 
 **With Flutter:**
 
 ```bash
-flutter pub get freezer
+flutter pub add freezer
 ```
 
 ### 1.2.3. Create a JSON File

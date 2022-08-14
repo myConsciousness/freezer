@@ -6,18 +6,21 @@ import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
 import 'freezed_resource.dart';
+import 'model/freezed_object.dart';
 
 class FreezedFile {
-  FreezedFile(final String filePath, final String fileName)
+  FreezedFile.create(final String filePath, final String fileName)
       : _file = File('$filePath/$fileName.dart');
 
-  /// The freezed file.
+  /// The freezed object file.
   final File _file;
 
   /// The formatter for the generated Dart code.
   final _dartFormatter = DartFormatter();
 
-  void write(final FreezedResource resource) => _file.writeAsStringSync(
-        _dartFormatter.format(resource.build()),
+  void write(final FreezedObject object) => _file.writeAsStringSync(
+        _dartFormatter.format(
+          FreezedResource(object).build(),
+        ),
       );
 }
