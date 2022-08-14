@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <b>The Most Powerful Way to Automatically Generate Model Objects based on JSON Files ⚡</b>
+  <b>The Most Powerful Way to Automatically Generate Model Objects from JSON Files ⚡</b>
 </p>
 
 ---
