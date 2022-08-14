@@ -50,7 +50,7 @@ class FreezedObject {
 
   static String _getOutputPath(final String filePath) {
     final basePath =
-        filePath.substring(0, filePath.indexOf('/design/') + '/design/'.length);
+        filePath.substring(0, filePath.indexOf('/design') + '/design'.length);
 
     return basePath.replaceFirst('design', 'lib');
   }
