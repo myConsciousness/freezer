@@ -51,6 +51,10 @@ class Freezer {
     ).execute();
 
     for (final freezedObject in freezedObjects) {
+      if (!Directory(freezedObject.path).existsSync()) {
+        Directory(freezedObject.path).createSync(recursive: true);
+      }
+
       FreezedFile.create(
         freezedObject.path,
         freezedObject.fileName,
