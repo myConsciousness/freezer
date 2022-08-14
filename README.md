@@ -38,12 +38,12 @@ So, let's add the prerequisite libraries to `pubspec.yaml` as follows.
 
 ```yaml
 dependencies:
-  json_annotation: ^4.6.0
-  freezed_annotation: ^2.1.0
+  json_annotation: latest
+  freezed_annotation: latest
 
 dev_dependencies:
-  json_serializable: ^6.3.1
-  freezed: ^2.1.0+1
+  json_serializable: latest
+  freezed: latest
 ```
 
 ### 1.2.2. Install Library
