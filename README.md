@@ -125,12 +125,12 @@ Started process for 1 files
 [INFO] Succeeded after 939ms with 4 outputs (4 actions)
 
 ┏━━ Generated dart files
-┣ ✔ /Users/user/package/lib//product.dart
-┣ ✔ /Users/user/package/lib//product.freezed.dart
-┣ ✔ /Users/user/package/lib//product.g.dart
-┣ ✔ /Users/user/package/lib//shop.dart
-┣ ✔ /Users/user/package/lib//shop.freezed.dart
-┣ ✔ /Users/user/package/lib//shop.g.dart
+┣ ✔ /Users/user/package/lib/product.dart
+┣ ✔ /Users/user/package/lib/product.freezed.dart
+┣ ✔ /Users/user/package/lib/product.g.dart
+┣ ✔ /Users/user/package/lib/shop.dart
+┣ ✔ /Users/user/package/lib/shop.freezed.dart
+┣ ✔ /Users/user/package/lib/shop.g.dart
 ┗━━ 6 files in 1.1904 seconds
 ```
 
