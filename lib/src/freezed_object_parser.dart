@@ -2,8 +2,8 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided the conditions.
 
+// Project imports:
 import 'exception/freezer_exception.dart';
-
 import 'model/freezed_object.dart';
 import 'model/import_package.dart';
 import 'model/parameter.dart';

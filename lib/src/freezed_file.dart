@@ -2,9 +2,13 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided the conditions.
 
+// Dart imports:
 import 'dart:io';
 
+// Package imports:
 import 'package:dart_style/dart_style.dart';
+
+// Project imports:
 import 'freezed_resource.dart';
 import 'model/freezed_object.dart';
 

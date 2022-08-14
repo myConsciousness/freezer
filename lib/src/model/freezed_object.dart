@@ -2,6 +2,7 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided the conditions.
 
+// Project imports:
 import '../extension/string_extension.dart';
 import '../freezer_identifier.dart';
 import 'import_package.dart';

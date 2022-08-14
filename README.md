@@ -99,7 +99,8 @@ And then store this JSON file in the `.design` folder of the root of project.
 .
 ├── analysis_options.yaml
 ├── design
-│   └── shop.freezer.json
+│   └── sample
+│       └── shop.freezer.json
 ├── lib
 ├── pubspec.lock
 └── pubspec.yaml
@@ -118,20 +119,20 @@ Then, this trial is successful if the following output is obtained.
 ```bash
 Started process for 1 files
 
-[INFO] Reading cached asset graph completed, took 31ms
-[INFO] Checking for updates since last build completed, took 293ms
-[INFO] Running build completed, took 917ms
-[INFO] Caching finalized dependency graph completed, took 17ms
-[INFO] Succeeded after 939ms with 4 outputs (4 actions)
+[INFO] Reading cached asset graph completed, took 28ms
+[INFO] Checking for updates since last build completed, took 297ms
+[INFO] Running build completed, took 4.0s
+[INFO] Caching finalized dependency graph completed, took 19ms
+[INFO] Succeeded after 4.1s with 0 outputs (3 actions)
 
 ┏━━ Generated dart files
-┣ ✔ /Users/user/package/lib/product.dart
-┣ ✔ /Users/user/package/lib/product.freezed.dart
-┣ ✔ /Users/user/package/lib/product.g.dart
-┣ ✔ /Users/user/package/lib/shop.dart
-┣ ✔ /Users/user/package/lib/shop.freezed.dart
-┣ ✔ /Users/user/package/lib/shop.g.dart
-┗━━ 6 files in 1.1904 seconds
+┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/products.dart
+┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/products.freezed.dart
+┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/products.g.dart
+┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/shop.dart
+┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/shop.freezed.dart
+┃  ┗━━ 🎉 /Users/user/freezer/lib/sample/shop.g.dart
+┗━━ 6 files in 5.5022 seconds
 ```
 
 And you can see generated dart codes in the `.lib` folder like below.
@@ -140,14 +141,16 @@ And you can see generated dart codes in the `.lib` folder like below.
 .
 ├── analysis_options.yaml
 ├── design
-│   └── shop.freezer.json
+│   └── sample
+│       └── shop.freezer.json
 ├── lib
-│   ├── product.dart
-│   ├── product.freezed.dart
-│   ├── product.g.dart
-│   ├── shop.dart
-│   ├── shop.freezed.dart
-│   └── shop.g.dart
+│   └── sample
+│       ├── products.dart
+│       ├── products.freezed.dart
+│       ├── products.g.dart
+│       ├── shop.dart
+│       ├── shop.freezed.dart
+│       └── shop.g.dart
 ├── pubspec.lock
 └── pubspec.yaml
 ```

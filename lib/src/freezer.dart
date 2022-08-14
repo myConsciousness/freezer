@@ -2,9 +2,11 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided the conditions.
 
+// Dart imports:
 import 'dart:convert';
 import 'dart:io';
 
+// Project imports:
 import 'build_runner.dart';
 import 'exception/freezer_exception.dart';
 import 'file_utils.dart' as file;
@@ -71,8 +73,13 @@ class Freezer {
     stdout.write('\n');
     stdout.write('┏━━ Generated dart files\n');
 
-    for (final name in _generatedFileNames) {
-      stdout.write('┣ ✔ $name\n');
+    for (int i = 0; i < _generatedFileNames.length; i++) {
+      if (i == _generatedFileNames.length - 1) {
+        stdout.write('┃  ┗━━ 🎉 ${_generatedFileNames[i]}\n');
+        break;
+      }
+
+      stdout.write('┃  ┣━━ 🎉 ${_generatedFileNames[i]}\n');
     }
 
     stdout.write('┗━━ ${_generatedFileNames.length} files in '
