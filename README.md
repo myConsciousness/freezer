@@ -1,3 +1,31 @@
+<p align="center">
+  <a href="https://github.com/myConsciousness/freezer">
+    <img alt="freezer" width="700px" src="https://user-images.githubusercontent.com/13072231/184524319-265ea7b1-5870-4213-acb8-e03eca676a0e.png">
+  </a>
+</p>
+
+<p align="center">
+  <b>The Most Powerful Way to Automatically Generate Model Objects from JSON Files ⚡</b>
+</p>
+
+---
+
+[![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=ff69b4)](https://github.com/sponsors/myConsciousness)
+[![GitHub Sponsor](https://img.shields.io/static/v1?label=Maintainer&message=myConsciousness&logo=GitHub&color=00acee)](https://github.com/myConsciousness)
+
+[![pub package](https://img.shields.io/pub/v/freezer.svg?logo=dart&logoColor=00b9fc)](https://pub.dartlang.org/packages/freezer)
+[![Dart SDK Version](https://badgen.net/pub/sdk-version/freezer)](https://pub.dev/packages/freezer/)
+[![Test](https://github.com/myConsciousness/freezer/actions/workflows/test.yml/badge.svg)](https://github.com/myConsciousness/freezer/actions/workflows/test.yml)
+[![Analyzer](https://github.com/myConsciousness/freezer/actions/workflows/analyzer.yml/badge.svg)](https://github.com/myConsciousness/freezer/actions/workflows/analyzer.yml)
+[![Issues](https://img.shields.io/github/issues/myConsciousness/freezer?logo=github&logoColor=white)](https://github.com/myConsciousness/freezer/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/myConsciousness/freezer?logo=github&logoColor=white)](https://github.com/myConsciousness/freezer/pulls)
+[![Stars](https://img.shields.io/github/stars/myConsciousness/freezer?logo=github&logoColor=white)](https://github.com/myConsciousness/freezer)
+[![Contributors](https://img.shields.io/github/contributors/myConsciousness/freezer)](https://github.com/myConsciousness/freezer/graphs/contributors)
+[![Code size](https://img.shields.io/github/languages/code-size/myConsciousness/freezer?logo=github&logoColor=white)](https://github.com/myConsciousness/freezer)
+[![Last Commits](https://img.shields.io/github/last-commit/myConsciousness/freezer?logo=git&logoColor=white)](https://github.com/myConsciousness/freezer/commits/main)
+[![License](https://img.shields.io/github/license/myConsciousness/freezer?logo=open-source-initiative&logoColor=green)](https://github.com/myConsciousness/freezer/blob/main/LICENSE)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/myConsciousness/freezer/blob/main/CODE_OF_CONDUCT.md)
+
 <!-- TOC -->
 
 - [1. Guide 🌎](#1-guide-)
