@@ -26,6 +26,8 @@
 [![License](https://img.shields.io/github/license/myConsciousness/freezer?logo=open-source-initiative&logoColor=green)](https://github.com/myConsciousness/freezer/blob/main/LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/myConsciousness/freezer/blob/main/CODE_OF_CONDUCT.md)
 
+---
+
 <!-- TOC -->
 
 - [1. Guide 🌎](#1-guide-)
