@@ -10,7 +10,7 @@ String resolveOriginalName(final String token) {
   return token;
 }
 
-String resolveAliasName(final String token) {
+String resolveFileName(final String token) {
   if (token.contains('.!as:')) {
     final elements = token.split('.!');
 
