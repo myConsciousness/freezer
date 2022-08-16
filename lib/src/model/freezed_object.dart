@@ -26,13 +26,13 @@ class FreezedObject {
     final List<ImportPackage> importPackages,
     final List<Parameter> parameters,
   ) {
-    final alias = identifier.resolveAliasName(fileName);
+    final aliasFileName = identifier.resolveFileName(fileName);
 
     return FreezedObject._(
       path: _getOutputPath(path),
-      fileName: alias.toSnakeCase(),
+      fileName: aliasFileName.toSnakeCase(),
       dartDoc: DartDoc.resolveFrom(dartDoc),
-      className: alias.toUpperCamelCase(),
+      className: aliasFileName.toUpperCamelCase(),
       importPackages: importPackages,
       parameters: parameters,
     );

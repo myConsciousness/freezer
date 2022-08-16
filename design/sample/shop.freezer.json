@@ -1,7 +1,7 @@
 {
   "shop": {
     "name.!required": "My Fancy Shop",
-    "product.!as:products": [
+    "products.!as:product": [
       {
         "name": "Chocolate",
         "price": 5.99
@@ -13,7 +13,7 @@
     ],
     "closed": false,
     "$name": "This is a comment for name field.",
-    "$product": "This is a comment for product field.",
-    "$$product": "This is a comment for product object."
+    "$products": "This is a comment for product field.",
+    "$$products": "This is a comment for product object."
   }
 }
