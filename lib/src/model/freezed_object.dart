@@ -4,33 +4,37 @@
 
 // Project imports:
 import '../extension/string_extension.dart';
-import '../freezer_identifier.dart';
+import '../freezer_identifier.dart' as identifier;
+import 'dart_doc.dart';
 import 'import_package.dart';
 import 'parameter.dart';
 
 class FreezedObject {
-  const FreezedObject._(
-    this.path,
-    this.fileName,
-    this.className,
-    this.importPackages,
-    this.parameters,
-  );
+  const FreezedObject._({
+    required this.path,
+    required this.fileName,
+    required this.dartDoc,
+    required this.className,
+    required this.importPackages,
+    required this.parameters,
+  });
 
   factory FreezedObject.resolveFrom(
     final String path,
     final String fileName,
+    final String dartDoc,
     final List<ImportPackage> importPackages,
     final List<Parameter> parameters,
   ) {
-    final alias = FreezerIdentifier.resolveAliasName(fileName);
+    final alias = identifier.resolveAliasName(fileName);
 
     return FreezedObject._(
-      _getOutputPath(path),
-      alias.toSnakeCase(),
-      alias.toUpperCamelCase(),
-      importPackages,
-      parameters,
+      path: _getOutputPath(path),
+      fileName: alias.toSnakeCase(),
+      dartDoc: DartDoc.resolveFrom(dartDoc),
+      className: alias.toUpperCamelCase(),
+      importPackages: importPackages,
+      parameters: parameters,
     );
   }
 
@@ -40,6 +44,9 @@ class FreezedObject {
   /// The file name
   final String fileName;
 
+  /// The dart document
+  final DartDoc dartDoc;
+
   /// The class name
   final String className;
 
@@ -48,6 +55,8 @@ class FreezedObject {
 
   /// The constructor parameters
   final List<Parameter> parameters;
+
+  bool get hasDartDoc => dartDoc.lines.isNotEmpty;
 
   static String _getOutputPath(final String filePath) {
     return filePath

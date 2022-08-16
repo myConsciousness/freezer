@@ -3,6 +3,7 @@
 // modification, are permitted provided the conditions.
 
 // Project imports:
+import 'extension/string_buffer_extension.dart';
 import 'model/freezed_object.dart';
 import 'model/import_package.dart';
 import 'model/parameter.dart';
@@ -29,6 +30,8 @@ class _FreezedResource implements FreezedResource {
         _resolveConstructorParameters(freezedObject.parameters);
 
     return '''
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 ${_resolveImportPackages(freezedObject.importPackages)}
@@ -36,16 +39,33 @@ ${_resolveImportPackages(freezedObject.importPackages)}
 part '$fileName.freezed.dart';
 part '$fileName.g.dart';
 
+// **************************************************************************
+// FreezerGenerator
+// **************************************************************************
+
+${_resolveClassDartDoc(freezedObject)}
 @freezed
 class $className with _\$$className {
   const factory $className({
     $constructorParameters
   }) = _$className;
 
+  /// Returns [$className] based on [json].
   factory $className.fromJson(Map<String, Object?> json) =>
       _\$${className}FromJson(json);
 }
 ''';
+  }
+
+  String _resolveClassDartDoc(final FreezedObject freezedObject) {
+    if (freezedObject.hasDartDoc) {
+      final buffer = StringBuffer();
+      buffer.writeDartDoc(freezedObject.dartDoc);
+
+      return buffer.toString();
+    }
+
+    return '';
   }
 
   String _resolveImportPackages(
@@ -56,6 +76,11 @@ class $className with _\$$className {
   String _resolveConstructorParameters(final List<Parameter> parameters) =>
       parameters.map((parameter) {
         final buffer = StringBuffer();
+
+        if (parameter.hasDartDoc) {
+          buffer.writeDartDoc(parameter.dartDoc);
+          buffer.writeln();
+        }
 
         if (parameter.hasAnnotation) {
           buffer.write(parameter.annotation);
