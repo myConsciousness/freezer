@@ -1,7 +1,7 @@
 {
   "shop": {
     "name.!required": "My Fancy Shop",
-    "products.!as:product": [
+    "products.!as:product.!name:my_products": [
       {
         "name": "Chocolate",
         "price": 5.99
