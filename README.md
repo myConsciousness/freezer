@@ -32,8 +32,8 @@
 
 - [1. Guide 🌎](#1-guide-)
   - [1.1. Motivation 💎](#11-motivation-)
-  - [1.2. From](#12-from)
-  - [1.3. To](#13-to)
+    - [1.2. From](#12-from)
+    - [1.3. To](#13-to)
   - [1.4. Getting Started 🏄](#14-getting-started-)
     - [1.4.1. Prerequisite](#141-prerequisite)
     - [1.4.2. Install Library](#142-install-library)
@@ -71,7 +71,7 @@ And all you have to do is prepare a JSON file defining the structure of the mode
 
 You can see the following example.
 
-## 1.2. From
+### 1.2. From
 
 ```json
 {
@@ -95,7 +95,7 @@ You can see the following example.
 }
 ```
 
-## 1.3. To
+### 1.3. To
 
 ```dart
 // GENERATED CODE - DO NOT MODIFY BY HAND
