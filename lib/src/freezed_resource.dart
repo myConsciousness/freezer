@@ -31,6 +31,7 @@ class _FreezedResource implements FreezedResource {
 
     return '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
+${_resolveIgnoreErrorComment(freezedObject.parameters)}
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -55,6 +56,16 @@ class $className with _\$$className {
       _\$${className}FromJson(json);
 }
 ''';
+  }
+
+  String _resolveIgnoreErrorComment(final List<Parameter> parameters) {
+    for (final parameter in parameters) {
+      if (parameter.hasAnnotation) {
+        return '// ignore_for_file: invalid_annotation_target';
+      }
+    }
+
+    return '';
   }
 
   String _resolveClassDartDoc(final FreezedObject freezedObject) {
