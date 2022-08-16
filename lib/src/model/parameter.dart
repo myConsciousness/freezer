@@ -23,18 +23,17 @@ class Parameter {
     final String key,
     final dynamic value,
   ) {
-    final originalName = identifier.resolveOriginalName(key);
-    final aliasFileName = identifier.resolveFileName(key);
+    final fieldName = identifier.resolveFieldName(key);
+    final fileName = identifier.resolveFileName(key);
     final annotation = _getJsonKeyAnnotation(key);
 
     if (value is List || value is Map) {
       return Parameter._(
         dartDoc: DartDoc.resolveFrom(dartDoc),
         isRequired: _isRequired(key),
-        name: originalName.toCamelCase(),
-        type: value is List ? 'List' : aliasFileName.toUpperCamelCase(),
-        typeVariable:
-            value is List ? '<${aliasFileName.toUpperCamelCase()}>' : '',
+        name: fieldName.toCamelCase(),
+        type: value is List ? 'List' : fileName.toUpperCamelCase(),
+        typeVariable: value is List ? '<${fileName.toUpperCamelCase()}>' : '',
         nested: true,
         annotation: annotation,
       );
@@ -44,7 +43,7 @@ class Parameter {
     return Parameter._(
       dartDoc: DartDoc.resolveFrom(dartDoc),
       isRequired: _isRequired(key),
-      name: originalName.toCamelCase(),
+      name: fieldName.toCamelCase(),
       type: value.runtimeType.toString(),
       nested: false,
       annotation: annotation,
@@ -80,11 +79,11 @@ class Parameter {
 
   static bool _isRequired(final String token) => token.contains('.!required');
 
-  static String _getJsonKeyAnnotation(final String key) {
-    // if (key.contains('.!name:')) {
-    //   return "@JsonKey(name: '${identifier.resolveFieldName(key)}')";
-    // }
+  static String? _getJsonKeyAnnotation(final String key) {
+    if (key.contains('.!name:')) {
+      return "@JsonKey(name: '${identifier.resolveOriginalName(key)}')";
+    }
 
-    return '';
+    return null;
   }
 }

@@ -77,7 +77,7 @@ You can see the following example.
 {
   "shop": {
     "name.!required": "My Fancy Shop",
-    "products.!as:product": [
+    "products.!as:product.!name:my_products": [
       {
         "name": "Chocolate",
         "price": 5.99
@@ -99,6 +99,7 @@ You can see the following example.
 
 ```dart
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -118,7 +119,7 @@ class Shop with _$Shop {
     required String name,
 
     /// This is a comment for product field.
-    List<Product>? products,
+    @JsonKey(name: 'products') List<Product>? myProducts,
     bool? closed,
   }) = _Shop;
 
