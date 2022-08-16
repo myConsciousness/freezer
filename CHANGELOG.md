@@ -1,5 +1,9 @@
 # Release Note
 
+## v0.2.0
+
+- Fixed to ignore warnings when `@JsonKey` is used for a field. ([#11](https://github.com/myConsciousness/freezer/issues/11))
+
 ## v0.1.0
 
 - Supported DartDoc for class object and field. ([#9](https://github.com/myConsciousness/freezer/issues/9))
