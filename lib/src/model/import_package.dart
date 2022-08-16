@@ -4,13 +4,13 @@
 
 // Project imports:
 import '../extension/string_extension.dart';
-import '../freezer_identifier.dart';
+import '../freezer_identifier.dart' as identifier;
 
 class ImportPackage {
   const ImportPackage._(this.name);
 
   factory ImportPackage.resolveFrom(final String name) => ImportPackage._(
-        FreezerIdentifier.resolveAliasName(name).toSnakeCase(),
+        identifier.resolveAliasName(name).toSnakeCase(),
       );
 
   /// The package name

@@ -4,10 +4,12 @@
 
 // Project imports:
 import '../extension/string_extension.dart';
-import '../freezer_identifier.dart';
+import '../freezer_identifier.dart' as identifier;
+import 'dart_doc.dart';
 
 class Parameter {
   const Parameter._({
+    required this.dartDoc,
     required this.isRequired,
     required this.name,
     required this.type,
@@ -16,12 +18,17 @@ class Parameter {
     this.annotation,
   }) : _nested = nested;
 
-  factory Parameter.resolveFrom(final String key, final dynamic value) {
-    final alias = FreezerIdentifier.resolveAliasName(key);
+  factory Parameter.resolveFrom(
+    final String dartDoc,
+    final String key,
+    final dynamic value,
+  ) {
+    final alias = identifier.resolveAliasName(key);
     final annotation = _getJsonKeyAnnotation(key);
 
     if (value is List) {
       return Parameter._(
+        dartDoc: DartDoc.resolveFrom(dartDoc),
         isRequired: _isRequired(key),
         name: alias.toCamelCase(),
         type: 'List',
@@ -31,6 +38,7 @@ class Parameter {
       );
     } else if (value is Map) {
       return Parameter._(
+        dartDoc: DartDoc.resolveFrom(dartDoc),
         isRequired: _isRequired(key),
         name: alias.toCamelCase(),
         type: alias.toUpperCamelCase(),
@@ -41,6 +49,7 @@ class Parameter {
 
     //! For standard types
     return Parameter._(
+      dartDoc: DartDoc.resolveFrom(dartDoc),
       isRequired: _isRequired(key),
       name: alias.toCamelCase(),
       type: value.runtimeType.toString(),
@@ -48,6 +57,9 @@ class Parameter {
       annotation: annotation,
     );
   }
+
+  /// The dartdoc for this field
+  final DartDoc dartDoc;
 
   final bool isRequired;
 
@@ -71,11 +83,13 @@ class Parameter {
 
   bool get isNested => _nested;
 
+  bool get hasDartDoc => dartDoc.lines.isNotEmpty;
+
   static bool _isRequired(final String token) => token.contains('.!required');
 
   static String _getJsonKeyAnnotation(final String key) {
     if (key.contains('.!as:')) {
-      return "@JsonKey(name: '${FreezerIdentifier.resolveOriginalName(key)}')";
+      return "@JsonKey(name: '${identifier.resolveOriginalName(key)}')";
     }
 
     return '';

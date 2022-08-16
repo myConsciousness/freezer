@@ -4,14 +4,16 @@
     "product.!as:products": [
       {
         "name": "Chocolate",
-        "price": 5.99,
-        "product_type": 1
+        "price": 5.99
       },
       {
         "name": "Gummy",
         "price": 8.99
       }
     ],
-    "closed": false
+    "closed": false,
+    "$name": "This is a comment for name field.",
+    "$product": "This is a comment for product field.",
+    "$$product": "This is a comment for product object."
   }
 }
