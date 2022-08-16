@@ -10,7 +10,7 @@ class ImportPackage {
   const ImportPackage._(this.name);
 
   factory ImportPackage.resolveFrom(final String name) => ImportPackage._(
-        identifier.resolveAliasName(name).toSnakeCase(),
+        identifier.resolveFileName(name).toSnakeCase(),
       );
 
   /// The package name

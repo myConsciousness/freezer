@@ -6,7 +6,7 @@
 {
   "shop": {
     "name.!required": "My Fancy Shop",
-    "product.!as:products": [
+    "products.!as:product": [
       {
         "name": "Chocolate",
         "price": 5.99
@@ -18,8 +18,8 @@
     ],
     "closed": false,
     "$name": "This is a comment for name field.",
-    "$product": "This is a comment for product field.",
-    "$$product": "This is a comment for product object."
+    "$products": "This is a comment for product field.",
+    "$$products": "This is a comment for product object."
   }
 }
 ```
@@ -31,7 +31,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'products.dart';
+import 'product.dart';
 
 part 'shop.freezed.dart';
 part 'shop.g.dart';
@@ -47,7 +47,7 @@ class Shop with _$Shop {
     required String name,
 
     /// This is a comment for product field.
-    @JsonKey(name: 'product') List<Products>? products,
+    List<Product>? products,
     bool? closed,
   }) = _Shop;
 
@@ -61,8 +61,8 @@ class Shop with _$Shop {
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'products.freezed.dart';
-part 'products.g.dart';
+part 'product.freezed.dart';
+part 'product.g.dart';
 
 // **************************************************************************
 // FreezerGenerator
@@ -70,14 +70,14 @@ part 'products.g.dart';
 
 /// This is a comment for product object.
 @freezed
-class Products with _$Products {
-  const factory Products({
+class Product with _$Product {
+  const factory Product({
     String? name,
     double? price,
-  }) = _Products;
+  }) = _Product;
 
-  /// Returns [Products] based on [json].
-  factory Products.fromJson(Map<String, Object?> json) =>
-      _$ProductsFromJson(json);
+  /// Returns [Product] based on [json].
+  factory Product.fromJson(Map<String, Object?> json) =>
+      _$ProductFromJson(json);
 }
 ```
