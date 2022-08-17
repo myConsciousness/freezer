@@ -19,5 +19,9 @@ jobs:
     - uses: subosito/flutter-action@v2.6.1
     - name: install dependencies
       run: flutter pub get
-    - name: run test
-      run: flutter test
+    - name: run test with coverage
+      run: flutter test --coverage
+    - uses: codecov/codecov-action@v3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage/lcov.info
