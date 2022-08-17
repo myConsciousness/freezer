@@ -16,6 +16,7 @@
         "price": 8.99
       }
     ],
+    "location": [-122.4194, 37.7749],
     "closed": false,
     "$name": "This is a comment for name field.",
     "$products": "This is a comment for product field.",
@@ -49,6 +50,7 @@ class Shop with _$Shop {
 
     /// This is a comment for product field.
     @JsonKey(name: 'products') List<Product>? myProducts,
+    List<double>? location,
     bool? closed,
   }) = _Shop;
 

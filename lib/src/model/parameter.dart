@@ -3,6 +3,7 @@
 // modification, are permitted provided the conditions.
 
 // Project imports:
+import '../exception/freezer_exception.dart';
 import '../extension/string_extension.dart';
 import '../freezer_identifier.dart' as identifier;
 import 'dart_doc.dart';
@@ -27,14 +28,20 @@ class Parameter {
     final fileName = identifier.resolveFileName(key);
     final annotation = _getJsonKeyAnnotation(key);
 
-    if (value is List || value is Map) {
+    if (_isCollection(value)) {
+      final nested = _isNested(value);
+
       return Parameter._(
         dartDoc: DartDoc.resolveFrom(dartDoc),
         isRequired: _isRequired(key),
         name: fieldName.toCamelCase(),
-        type: value is List ? 'List' : fileName.toUpperCamelCase(),
-        typeVariable: value is List ? '<${fileName.toUpperCamelCase()}>' : '',
-        nested: true,
+        type: _isList(value) ? 'List' : fileName.toUpperCamelCase(),
+        typeVariable: _isList(value) && nested
+            ? '<${fileName.toUpperCamelCase()}>'
+            : _isList(value)
+                ? '<${value[0].runtimeType.toString()}>'
+                : '',
+        nested: nested,
         annotation: annotation,
       );
     }
@@ -85,5 +92,18 @@ class Parameter {
     }
 
     return null;
+  }
+
+  static bool _isCollection(final dynamic value) =>
+      value is List || value is Map;
+
+  static bool _isList(final dynamic value) => value is List;
+
+  static bool _isNested(final dynamic collection) {
+    if (collection is List) {
+      return collection[0] is Map<String, dynamic>;
+    }
+
+    return false;
   }
 }

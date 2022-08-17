@@ -88,6 +88,7 @@ You can see the following example.
         "price": 8.99
       }
     ],
+    "location": [-122.4194, 37.7749],
     "closed": false,
     "$name": "This is a comment for name field.",
     "$products": "This is a comment for product field.",
@@ -121,6 +122,7 @@ class Shop with _$Shop {
 
     /// This is a comment for product field.
     @JsonKey(name: 'products') List<Product>? myProducts,
+    List<double>? location,
     bool? closed,
   }) = _Shop;
 
@@ -210,18 +212,21 @@ So, now let's create a JSON file with the following structure as a trial.
 {
   "shop": {
     "name.!required": "My Fancy Shop",
-    "products.!as:product": [
+    "products.!as:product.!name:my_products": [
       {
         "name": "Chocolate",
-        "price": 5.99,
-        "product_type": 1
+        "price": 5.99
       },
       {
         "name": "Gummy",
         "price": 8.99
       }
     ],
-    "closed": false
+    "location": [-122.4194, 37.7749],
+    "closed": false,
+    "$name": "This is a comment for name field.",
+    "$products": "This is a comment for product field.",
+    "$$products": "This is a comment for product object."
   }
 }
 ```
@@ -259,9 +264,9 @@ Started process for 1 files
 [INFO] Succeeded after 4.1s with 0 outputs (3 actions)
 
 ┏━━ Generated dart files
-┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/products.dart
-┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/products.freezed.dart
-┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/products.g.dart
+┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/product.dart
+┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/product.freezed.dart
+┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/product.g.dart
 ┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/shop.dart
 ┃  ┣━━ 🎉 /Users/user/freezer/lib/sample/shop.freezed.dart
 ┃  ┗━━ 🎉 /Users/user/freezer/lib/sample/shop.g.dart
