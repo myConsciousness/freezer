@@ -3,6 +3,8 @@
 // modification, are permitted provided the conditions.
 
 // Project imports:
+import 'package:dart_style/dart_style.dart';
+
 import 'extension/string_buffer_extension.dart';
 import 'model/freezed_object.dart';
 import 'model/import_package.dart';
@@ -16,10 +18,13 @@ abstract class FreezedResource {
 }
 
 class _FreezedResource implements FreezedResource {
-  const _FreezedResource(this.freezedObject);
+  _FreezedResource(this.freezedObject);
 
   /// The freezed object to be generated
   final FreezedObject freezedObject;
+
+  /// The formatter for the generated Dart code.
+  final _dartFormatter = DartFormatter();
 
   @override
   String build() {
@@ -29,7 +34,8 @@ class _FreezedResource implements FreezedResource {
     final constructorParameters =
         _resolveConstructorParameters(freezedObject.parameters);
 
-    return '''
+    return _dartFormatter.format(
+      '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
 ${_resolveIgnoreErrorComment(freezedObject.parameters)}
 
@@ -55,7 +61,8 @@ class $className with _\$$className {
   factory $className.fromJson(Map<String, Object?> json) =>
       _\$${className}FromJson(json);
 }
-''';
+''',
+    );
   }
 
   String _resolveIgnoreErrorComment(final List<Parameter> parameters) {
