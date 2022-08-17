@@ -8,4 +8,4 @@ import 'dart:async';
 // Project imports:
 import 'package:freezer/src/freezer.dart';
 
-Future<void> main(List<String> args) async => await Freezer().run();
+Future<void> main(List<String> args) async => await Freezer().execute();

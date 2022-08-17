@@ -16,7 +16,7 @@ import 'freezed_object_parser.dart';
 class Freezer {
   final _generatedFileNames = <String>[];
 
-  Future<void> run() async {
+  Future<void> execute() async {
     final stopwatch = Stopwatch();
     stopwatch.start();
 
