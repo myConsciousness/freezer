@@ -3,7 +3,6 @@
 // modification, are permitted provided the conditions.
 
 // Project imports:
-import '../exception/freezer_exception.dart';
 import '../extension/string_extension.dart';
 import '../freezer_identifier.dart' as identifier;
 import 'dart_doc.dart';
