@@ -17,6 +17,7 @@
 [![Dart SDK Version](https://badgen.net/pub/sdk-version/freezer)](https://pub.dev/packages/freezer/)
 [![Test](https://github.com/myConsciousness/freezer/actions/workflows/test.yml/badge.svg)](https://github.com/myConsciousness/freezer/actions/workflows/test.yml)
 [![Analyzer](https://github.com/myConsciousness/freezer/actions/workflows/analyzer.yml/badge.svg)](https://github.com/myConsciousness/freezer/actions/workflows/analyzer.yml)
+[![codecov](https://codecov.io/gh/myConsciousness/freezer/branch/main/graph/badge.svg?token=J5GT1PF9Y3)](https://codecov.io/gh/myConsciousness/freezer)
 [![Issues](https://img.shields.io/github/issues/myConsciousness/freezer?logo=github&logoColor=white)](https://github.com/myConsciousness/freezer/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/myConsciousness/freezer?logo=github&logoColor=white)](https://github.com/myConsciousness/freezer/pulls)
 [![Stars](https://img.shields.io/github/stars/myConsciousness/freezer?logo=github&logoColor=white)](https://github.com/myConsciousness/freezer)
