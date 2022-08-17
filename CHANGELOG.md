@@ -1,5 +1,9 @@
 # Release Note
 
+## v0.3.0
+
+- Supported not nested list structure like `List<String>`. This will automatically perform type identification when the generator is executed. However, be sure to include values of a specific type in the list defined in the JSON file. ([#7](https://github.com/myConsciousness/freezer/issues/7))
+
 ## v0.2.0
 
 - For future extensibility, fixed the specification of the `!as:` identifier. From this version, this identifier should specify **the name of the file to be generated**. The file name of the snake case specified by this identifier is converted to a camel case class name at runtime. ([#12](https://github.com/myConsciousness/freezer/issues/12))
