@@ -3,6 +3,7 @@
 ## v0.4.0
 
 - Supported Enum generating and mapping from JSON file. ([#6](https://github.com/myConsciousness/freezer/issues/6))
+- Improved `README.md`. ([#29](https://github.com/myConsciousness/freezer/issues/29))
 
 ## v0.3.0
 
