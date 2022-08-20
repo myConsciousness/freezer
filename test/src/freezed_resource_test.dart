@@ -2,24 +2,34 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided the conditions.
 
-import 'package:freezer/src/freezed_resource.dart';
-import 'package:freezer/src/model/freezed_object.dart';
+// Package imports:
+import 'package:dart_style/dart_style.dart';
+
+// Project imports:
+import 'package:freezer/src/model/dart_object.dart';
+import 'package:freezer/src/model/freezed_parameter.dart';
 import 'package:freezer/src/model/import_package.dart';
-import 'package:freezer/src/model/parameter.dart';
+import 'package:freezer/src/model/object_type.dart';
+import 'package:freezer/src/resource_builder.dart';
 import 'package:test/test.dart';
 
 void main() {
+  final formatter = DartFormatter();
+
   group('.build', () {
     test('normal case', () {
-      final object = FreezedObject.resolveFrom(
+      final object = DartObject.resolveFrom(
+        ObjectType.freezed,
         'design/src',
         'test',
         '',
         [],
-        [Parameter.resolveFrom('', 'param', 1)],
+        [FreezedParameter.resolveFrom('', 'param', 1)],
       );
 
-      final actual = FreezedResource(object).build();
+      final actual = formatter.format(
+        ResourceBuilder.forFreezed(object).execute(),
+      );
 
       expect(actual, '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -46,20 +56,22 @@ class Test with _\$Test {
     });
 
     test('with List parameter and import', () {
-      final object = FreezedObject.resolveFrom(
+      final object = DartObject.resolveFrom(
+        ObjectType.freezed,
         'design/src',
         'test',
         '',
         [ImportPackage.resolveFrom('params.!as:param')],
         [
-          Parameter.resolveFrom('', 'params.!as:param', [
+          FreezedParameter.resolveFrom('', 'params.!as:param', [
             {'name': 'something'}
           ])
         ],
       );
 
-      final actual = FreezedResource(object).build();
-
+      final actual = formatter.format(
+        ResourceBuilder.forFreezed(object).execute(),
+      );
       expect(actual, '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
@@ -87,17 +99,20 @@ class Test with _\$Test {
     });
 
     test('with Map parameter and import', () {
-      final object = FreezedObject.resolveFrom(
+      final object = DartObject.resolveFrom(
+        ObjectType.freezed,
         'design/src',
         'test',
         '',
         [ImportPackage.resolveFrom('param')],
         [
-          Parameter.resolveFrom('', 'param', {'name': 'something'})
+          FreezedParameter.resolveFrom('', 'param', {'name': 'something'})
         ],
       );
 
-      final actual = FreezedResource(object).build();
+      final actual = formatter.format(
+        ResourceBuilder.forFreezed(object).execute(),
+      );
 
       expect(actual, '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -126,13 +141,14 @@ class Test with _\$Test {
     });
 
     test('with field alias', () {
-      final object = FreezedObject.resolveFrom(
+      final object = DartObject.resolveFrom(
+        ObjectType.freezed,
         'design/src',
         'test',
         '',
         [ImportPackage.resolveFrom('param.!name:my_param')],
         [
-          Parameter.resolveFrom(
+          FreezedParameter.resolveFrom(
             '',
             'param.!name:my_param',
             {'name': 'something'},
@@ -140,7 +156,9 @@ class Test with _\$Test {
         ],
       );
 
-      final actual = FreezedResource(object).build();
+      final actual = formatter.format(
+        ResourceBuilder.forFreezed(object).execute(),
+      );
 
       expect(actual, '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -170,13 +188,14 @@ class Test with _\$Test {
     });
 
     test('with dartdoc for class', () {
-      final object = FreezedObject.resolveFrom(
+      final object = DartObject.resolveFrom(
+        ObjectType.freezed,
         'design/src',
         'test',
         'Test description.',
         [ImportPackage.resolveFrom('param')],
         [
-          Parameter.resolveFrom(
+          FreezedParameter.resolveFrom(
             '',
             'param',
             {'name': 'something'},
@@ -184,7 +203,9 @@ class Test with _\$Test {
         ],
       );
 
-      final actual = FreezedResource(object).build();
+      final actual = formatter.format(
+        ResourceBuilder.forFreezed(object).execute(),
+      );
 
       expect(actual, '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -214,13 +235,14 @@ class Test with _\$Test {
     });
 
     test('with dartdoc for field', () {
-      final object = FreezedObject.resolveFrom(
+      final object = DartObject.resolveFrom(
+        ObjectType.freezed,
         'design/src',
         'test',
         '',
         [ImportPackage.resolveFrom('param')],
         [
-          Parameter.resolveFrom(
+          FreezedParameter.resolveFrom(
             'Test description.',
             'param',
             {'name': 'something'},
@@ -228,7 +250,9 @@ class Test with _\$Test {
         ],
       );
 
-      final actual = FreezedResource(object).build();
+      final actual = formatter.format(
+        ResourceBuilder.forFreezed(object).execute(),
+      );
 
       expect(actual, '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -258,13 +282,14 @@ class Test with _\$Test {
     });
 
     test('with dartdoc for class and field', () {
-      final object = FreezedObject.resolveFrom(
+      final object = DartObject.resolveFrom(
+        ObjectType.freezed,
         'design/src',
         'test',
         'Test description for class.',
         [ImportPackage.resolveFrom('param')],
         [
-          Parameter.resolveFrom(
+          FreezedParameter.resolveFrom(
             'Test description for field.',
             'param',
             {'name': 'something'},
@@ -272,7 +297,9 @@ class Test with _\$Test {
         ],
       );
 
-      final actual = FreezedResource(object).build();
+      final actual = formatter.format(
+        ResourceBuilder.forFreezed(object).execute(),
+      );
 
       expect(actual, '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -303,13 +330,14 @@ class Test with _\$Test {
     });
 
     test('with required identifier', () {
-      final object = FreezedObject.resolveFrom(
+      final object = DartObject.resolveFrom(
+        ObjectType.freezed,
         'design/src',
         'test',
         '',
         [ImportPackage.resolveFrom('param.!required')],
         [
-          Parameter.resolveFrom(
+          FreezedParameter.resolveFrom(
             '',
             'param.!required',
             {'name': 'something'},
@@ -317,7 +345,9 @@ class Test with _\$Test {
         ],
       );
 
-      final actual = FreezedResource(object).build();
+      final actual = formatter.format(
+        ResourceBuilder.forFreezed(object).execute(),
+      );
 
       expect(actual, '''
 // GENERATED CODE - DO NOT MODIFY BY HAND

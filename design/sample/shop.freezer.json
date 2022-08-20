@@ -6,12 +6,14 @@
         {
           "name": "Chocolate",
           "price": 5.99,
-          "product_type": 0
+          "product_type": "sweet",
+          "country": "belgium"
         },
         {
           "name": "Gummy",
           "price": 8.99,
-          "product_type": 0
+          "product_type": "sweet",
+          "country": "germany"
         }
       ],
       "location": [-122.4194, 37.7749],
@@ -24,13 +26,17 @@
   "enums": {
     "product_type": [
       {
+        "$": "It represents sweets.",
         "name": "sweet",
         "value": 0
       },
       {
+        "$": "It represents juices.",
         "name": "juice",
         "value": 1
       }
-    ]
+    ],
+    "country": ["germany", "belgium"],
+    "$$product_type": "This is a comment for product_type enum object."
   }
 }

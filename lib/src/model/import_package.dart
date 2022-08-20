@@ -4,7 +4,7 @@
 
 // Project imports:
 import '../extension/string_extension.dart';
-import '../freezer_identifier.dart' as identifier;
+import '../policy/freezer_identifier.dart' as identifier;
 
 class ImportPackage {
   const ImportPackage._(this.name);
