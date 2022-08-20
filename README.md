@@ -32,7 +32,7 @@
 <!-- TOC -->
 
 - [1. Guide 🌎](#1-guide-)
-  - [1.1. Motivation 💎](#11-motivation-)
+  - [1.1. Features 💎](#11-features-)
     - [1.1.1. From](#111-from)
     - [1.1.2. To](#112-to)
   - [1.2. Getting Started 🏄](#12-getting-started-)
@@ -65,19 +65,20 @@ This library was built on the foundation of the [json_serializable](https://pub.
 
 This library provides the ability to automatically generate class objects supported by the [freezed](https://pub.dev/packages/freezed) library **directly from JSON files**.
 
-The goal of this library is to **maximize developer productivity by automatically generating implementations from design** data.
-
 Show some ❤️ and star the repo to support the project.
 
 > **Note**</br>
 > Many of the specifications in this library are still in development. Your contributions are very welcome!
 
-## 1.1. Motivation 💎
+## 1.1. Features 💎
 
-- Realize JSON-based model design.
-- Realize automatic generation of model objects from design.
-- Synchronize the design and implementation of model objects.
-- Expand the possibilities of the freezed library even more.
+- **Generate model objects on a JSON basis**.
+- **Synchronize model design and implementation** on a JSON basis.
+- **JSON from API can be converted directly into model objects**.
+- **Aliases and other useful identifiers**.
+- Supports **automatic Enum generation and mapping with model objects**.
+- The automatically generated model objects are **based on the freezed library**.
+- **Very easy to install**.
 - etc...
 
 And all you have to do is prepare a JSON file defining the structure of the model object to be generated and run the command `dart run freezer:main` in a terminal.
@@ -522,7 +523,8 @@ Then, define the enums to be generated in the root `"enums"` object like followi
 }
 ```
 
-In the above example, the two Enums are defined. It's `product_type` and `country`. The principle of mapping a field in a model object to an Enum is very simple: simply match the name of the field in the model object with the name of the Enum.</br>
+In the above example, the two Enums are defined. It's `product_type` and `country`. The principle of mapping a field in a model object to an Enum is very simple: simply match the name of the field in the model object with the name of the Enum.
+
 `$` and `$$country` are fields representing dartdocs, respectively. `$` is a dartdoc for a specific element of Enum, and fields beginning with `$$` are dartdoc for a specific Enum object by name.
 
 For example, the `product_type` field of the `"products"` object in the `"models"` object will automatically map to the `"product_type"` Enum in the `"enums"` object.
