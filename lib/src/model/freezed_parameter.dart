@@ -4,11 +4,11 @@
 
 // Project imports:
 import '../extension/string_extension.dart';
-import '../freezer_identifier.dart' as identifier;
+import '../policy/freezer_identifier.dart' as identifier;
 import 'dart_doc.dart';
 
-class Parameter {
-  const Parameter._({
+class FreezedParameter {
+  const FreezedParameter._({
     required this.dartDoc,
     required this.isRequired,
     required this.name,
@@ -18,19 +18,31 @@ class Parameter {
     this.annotation,
   }) : _nested = nested;
 
-  factory Parameter.resolveFrom(
+  factory FreezedParameter.resolveFrom(
     final String dartDoc,
     final String key,
     final dynamic value,
   ) {
-    final fieldName = identifier.resolveFieldName(key);
     final fileName = identifier.resolveFileName(key);
+    final fieldName = identifier.resolveFieldName(key);
     final annotation = _getJsonKeyAnnotation(key);
+
+    //! For Enum types.
+    if (value == null) {
+      return FreezedParameter._(
+        dartDoc: DartDoc.resolveFrom(dartDoc),
+        isRequired: _isRequired(key),
+        name: fieldName.toCamelCase(),
+        type: fileName.toUpperCamelCase(),
+        nested: false,
+        annotation: annotation,
+      );
+    }
 
     if (_isCollection(value)) {
       final nested = _isNested(value);
 
-      return Parameter._(
+      return FreezedParameter._(
         dartDoc: DartDoc.resolveFrom(dartDoc),
         isRequired: _isRequired(key),
         name: fieldName.toCamelCase(),
@@ -38,7 +50,7 @@ class Parameter {
         typeVariable: _isList(value) && nested
             ? '<${fileName.toUpperCamelCase()}>'
             : _isList(value)
-                ? '<${value[0].runtimeType.toString()}>'
+                ? '<${value.first.runtimeType.toString()}>'
                 : '',
         nested: nested,
         annotation: annotation,
@@ -46,7 +58,7 @@ class Parameter {
     }
 
     //! For standard types
-    return Parameter._(
+    return FreezedParameter._(
       dartDoc: DartDoc.resolveFrom(dartDoc),
       isRequired: _isRequired(key),
       name: fieldName.toCamelCase(),

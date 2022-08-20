@@ -8,19 +8,21 @@ import 'dart:io';
 
 // Project imports:
 import 'build_runner.dart';
+import 'dart_file.dart';
+import 'enum_object_parser.dart';
 import 'exception/freezer_exception.dart';
-import 'file_utils.dart' as file;
-import 'freezed_file.dart';
 import 'freezed_object_parser.dart';
+import 'model/dart_object.dart';
+import 'model/object_type.dart';
 
 class Freezer {
   final _generatedFileNames = <String>[];
 
-  Future<void> run() async {
+  Future<void> execute() async {
     final stopwatch = Stopwatch();
     stopwatch.start();
 
-    final designFiles = file.findDesignFiles(Directory.current.path);
+    final designFiles = _findDesignFiles(Directory.current.path);
 
     if (designFiles.isEmpty) {
       throw FreezerException('No design files to be freezed found.');
@@ -29,9 +31,16 @@ class Freezer {
     stdout.write('Started process for ${designFiles.length} files\n\n');
 
     for (final filePath in designFiles.keys) {
-      _createFreezedResources(
-        filePath,
-        jsonDecode(designFiles[filePath]!.readAsStringSync()),
+      final root = jsonDecode(
+        designFiles[filePath]!.readAsStringSync(),
+      );
+
+      _outputDartObjects(
+        _decodeFreezedObjects(
+          filePath,
+          root,
+          _decodeEnumObjects(filePath, root),
+        ),
       );
     }
 
@@ -43,29 +52,51 @@ class Freezer {
     _printResult(stopwatch);
   }
 
-  void _createFreezedResources(
+  List<DartObject> _decodeEnumObjects(
     final String filePath,
     final dynamic root,
   ) {
-    final freezedObjects = FreezedObjectParser(
+    if (!root.containsKey('enums')) {
+      return [];
+    }
+
+    final objects = EnumObjectParser(
       filePath,
-      root['models'] ?? root,
+      root['enums'],
     ).execute();
 
-    for (final freezedObject in freezedObjects) {
-      if (!Directory(freezedObject.path).existsSync()) {
-        Directory(freezedObject.path).createSync(recursive: true);
+    return objects;
+  }
+
+  List<DartObject> _decodeFreezedObjects(
+    final String filePath,
+    final dynamic root,
+    final List<DartObject> enumObjects,
+  ) =>
+      FreezedObjectParser(
+        filePath,
+        root['models'] ?? root,
+        enumObjects,
+      ).execute();
+
+  void _outputDartObjects(final List<DartObject> objects) {
+    for (final object in objects) {
+      if (!Directory(object.path).existsSync()) {
+        Directory(object.path).createSync(recursive: true);
       }
 
-      FreezedFile.create(
-        freezedObject.path,
-        freezedObject.fileName,
-      ).write(freezedObject);
+      DartFile.create(
+        object.path,
+        object.fileName,
+      ).write(object);
 
-      _generatedFileNames
-        ..add('${freezedObject.path}/${freezedObject.fileName}.dart')
-        ..add('${freezedObject.path}/${freezedObject.fileName}.freezed.dart')
-        ..add('${freezedObject.path}/${freezedObject.fileName}.g.dart');
+      _generatedFileNames.add('${object.path}/${object.fileName}.dart');
+
+      if (object.type == ObjectType.freezed) {
+        _generatedFileNames
+          ..add('${object.path}/${object.fileName}.freezed.dart')
+          ..add('${object.path}/${object.fileName}.g.dart');
+      }
     }
   }
 
@@ -85,5 +116,28 @@ class Freezer {
     stdout.write('┗━━ ${_generatedFileNames.length} files in '
         '${stopwatch.elapsed.inSeconds}.${stopwatch.elapsedMilliseconds} '
         'seconds\n\n');
+  }
+
+  Map<String, File> _findDesignFiles(String currentPath) {
+    final contents = [
+      ..._readDirectory(currentPath, 'design'),
+    ];
+
+    final designFiles = <String, File>{};
+    for (final content in contents) {
+      if (content is File && content.path.endsWith('.freezer.json')) {
+        designFiles[content.path] = content;
+      }
+    }
+
+    return designFiles;
+  }
+
+  List<FileSystemEntity> _readDirectory(String currentPath, String name) {
+    if (Directory('$currentPath/$name').existsSync()) {
+      return Directory('$currentPath/$name').listSync(recursive: true);
+    }
+
+    return [];
   }
 }

@@ -4,61 +4,60 @@
 
 // Project imports:
 import '../extension/string_extension.dart';
-import '../freezer_identifier.dart' as identifier;
+import '../policy/freezer_identifier.dart' as identifier;
 import 'dart_doc.dart';
 import 'import_package.dart';
-import 'parameter.dart';
+import 'object_type.dart';
 
-class FreezedObject {
-  const FreezedObject._({
+class DartObject<E> {
+  DartObject._({
+    required this.type,
     required this.path,
     required this.fileName,
     required this.dartDoc,
     required this.className,
     required this.importPackages,
-    required this.parameters,
+    required this.elements,
   });
 
-  factory FreezedObject.resolveFrom(
+  factory DartObject.resolveFrom(
+    final ObjectType type,
     final String path,
     final String fileName,
     final String dartDoc,
     final List<ImportPackage> importPackages,
-    final List<Parameter> parameters,
+    final List<E> elements,
   ) {
     final aliasFileName = identifier.resolveFileName(fileName);
 
-    return FreezedObject._(
-      path: _getOutputPath(path),
+    return DartObject._(
+      type: type,
+      path: _resolveOutputPath(path),
       fileName: aliasFileName.toSnakeCase(),
       dartDoc: DartDoc.resolveFrom(dartDoc),
       className: aliasFileName.toUpperCamelCase(),
       importPackages: importPackages,
-      parameters: parameters,
+      elements: elements,
     );
   }
 
-  /// The path of the file.
+  final ObjectType type;
+
   final String path;
 
-  /// The file name
   final String fileName;
 
-  /// The dart document
   final DartDoc dartDoc;
 
-  /// The class name
   final String className;
 
-  /// The import packages
   final List<ImportPackage> importPackages;
 
-  /// The constructor parameters
-  final List<Parameter> parameters;
+  final List<E> elements;
 
   bool get hasDartDoc => dartDoc.lines.isNotEmpty;
 
-  static String _getOutputPath(final String filePath) {
+  static String _resolveOutputPath(final String filePath) {
     return filePath
         .replaceFirst('/design', '/lib')
         .substring(0, filePath.lastIndexOf('/') - 3);

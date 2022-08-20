@@ -1,5 +1,9 @@
 # Release Note
 
+## v0.4.0
+
+- Supported Enum generating and mapping from JSON file. ([#6](https://github.com/myConsciousness/freezer/issues/6))
+
 ## v0.3.0
 
 - Supported not nested list structure like `List<String>`. This will automatically perform type identification when the generator is executed. However, be sure to include values of a specific type in the list defined in the JSON file. ([#7](https://github.com/myConsciousness/freezer/issues/7))
