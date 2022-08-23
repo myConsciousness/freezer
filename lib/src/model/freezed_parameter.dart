@@ -71,6 +71,7 @@ class FreezedParameter {
   /// The dartdoc for this field
   final DartDoc dartDoc;
 
+  /// The flag represents this element is required or not
   final bool isRequired;
 
   /// The name
@@ -111,6 +112,10 @@ class FreezedParameter {
   static bool _isList(final dynamic value) => value is List;
 
   static bool _isNested(final dynamic collection) {
+    if (collection is Map) {
+      return true;
+    }
+
     if (collection is List) {
       return collection[0] is Map<String, dynamic>;
     }

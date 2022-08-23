@@ -14,6 +14,7 @@ import 'exception/freezer_exception.dart';
 import 'freezed_object_parser.dart';
 import 'model/dart_object.dart';
 import 'model/object_type.dart';
+import 'model/reference.dart';
 
 class Freezer {
   final _generatedFileNames = <String>[];
@@ -30,17 +31,18 @@ class Freezer {
 
     stdout.write('Started process for ${designFiles.length} files\n\n');
 
+    final enumObjects = <DartObject>[];
     for (final filePath in designFiles.keys) {
       final root = jsonDecode(
         designFiles[filePath]!.readAsStringSync(),
       );
 
+      enumObjects.addAll(
+        _parseEnumObjects(filePath, root),
+      );
+
       _outputDartObjects(
-        _decodeFreezedObjects(
-          filePath,
-          root,
-          _decodeEnumObjects(filePath, root),
-        ),
+        _parseFreezedObjects(filePath, root, enumObjects),
       );
     }
 
@@ -52,7 +54,7 @@ class Freezer {
     _printResult(stopwatch);
   }
 
-  List<DartObject> _decodeEnumObjects(
+  List<DartObject> _parseEnumObjects(
     final String filePath,
     final dynamic root,
   ) {
@@ -68,16 +70,41 @@ class Freezer {
     return objects;
   }
 
-  List<DartObject> _decodeFreezedObjects(
+  List<DartObject> _parseFreezedObjects(
     final String filePath,
     final dynamic root,
     final List<DartObject> enumObjects,
-  ) =>
-      FreezedObjectParser(
-        filePath,
-        root['models'] ?? root,
-        enumObjects,
-      ).execute();
+  ) {
+    final freezedObjects = FreezedObjectParser(
+      filePath,
+      root['models'] ?? root,
+      enumObjects,
+      _parseReferences(root),
+    ).execute();
+
+    if (enumObjects.isNotEmpty) {
+      freezedObjects.addAll(enumObjects);
+    }
+
+    return freezedObjects;
+  }
+
+  List<Reference> _parseReferences(final dynamic root) {
+    if (!root.containsKey('references')) {
+      return [];
+    }
+
+    final referenceMap = root['references'] as Map<String, dynamic>;
+    final references = <Reference>[];
+
+    for (final name in referenceMap.keys) {
+      references.add(
+        Reference(name, referenceMap[name]),
+      );
+    }
+
+    return references;
+  }
 
   void _outputDartObjects(final List<DartObject> objects) {
     for (final object in objects) {

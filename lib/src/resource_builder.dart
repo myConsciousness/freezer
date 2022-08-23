@@ -39,7 +39,7 @@ ${_resolveIgnoreErrorComment(elements)}
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-${_resolveImportPackages(freezedObject.importPackages)}
+${_resolveImportPackages(freezedObject.imports)}
 
 part '$fileName.freezed.dart';
 part '$fileName.g.dart';
@@ -83,14 +83,20 @@ class $className with _\$$className {
     return '';
   }
 
-  String _resolveImportPackages(
-    final List<ImportPackage> importPackages,
-  ) {
-    importPackages.sort(((a, b) => a.name.compareTo(b.name)));
+  String _resolveImportPackages(final List<Import> imports) {
+    imports.sort(((a, b) => a.name.compareTo(b.name)));
 
-    return importPackages
-        .map((package) => "import '${package.name}.dart';")
-        .join();
+    return imports.map((package) {
+      if (package.hasPath) {
+        if (package.path!.endsWith('/')) {
+          return "import '${package.path}${package.name}.dart';";
+        }
+
+        return "import '${package.path}/${package.name}.dart';";
+      }
+
+      return "import '${package.name}.dart';";
+    }).join();
   }
 
   String _resolveConstructorParameters(
