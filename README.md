@@ -52,6 +52,7 @@
       - [1.3.3.2. To](#1332-to)
   - [1.4. Advanced Usage](#14-advanced-usage)
     - [1.4.1. Enum Generation and Mapping](#141-enum-generation-and-mapping)
+    - [1.4.2. External Directory Reference](#142-external-directory-reference)
   - [1.5. Contribution 🏆](#15-contribution-)
   - [1.6. Support ❤️](#16-support-️)
   - [1.7. License 🔑](#17-license-)
@@ -569,6 +570,159 @@ class Product with _$Product {
     String? name,
     double? price,
     ProductType? productType,
+    Country? country,
+  }) = _Product;
+
+  factory Product.fromJson(Map<String, Object?> json) =>
+      _$ProductFromJson(json);
+}
+```
+
+### 1.4.2. External Directory Reference
+
+For example, there may be situations where you want to generate common objects in an external directory and reuse the common objects generated in that external directory.
+
+In such cases, `references` feature is very useful. By defining a `"references"` object in the root of the JSON file, you can refer to objects in external directories.
+
+For example, consider the following structure.
+
+```bash
+.
+├── design
+│   └── sample
+│       ├── common
+│       │   └── common.freezer.json
+│       └── shop.freezer.json
+└── lib
+```
+
+And `common.freezer.json` has json structure like below.
+
+```json
+{
+  "models": {
+    "manager": {
+      "id": 12345,
+      "name": "Jason"
+    }
+  },
+  "enums": {
+    "country": ["germany", "belgium"]
+  }
+}
+```
+
+And `shop.freezer.json` has json structure like below.
+
+```json
+{
+  "models": {
+    "shop": {
+      "name.!required": "My Fancy Shop",
+      "products.!as:product.!name:my_products": [
+        {
+          "name": "Chocolate",
+          "price": 5.99,
+          "country": "belgium"
+        }
+      ],
+      "manager": {
+        "id": 12345,
+        "name": "Jason"
+      }
+    }
+  }
+}
+```
+
+You can find common terms in the fields defined in `common.freezer.json` and in `shop.freezer.json`. Yes, it's `manager` object and `country` enum.
+
+Then, you can link these objects between different files by using `"references"`. Let's add `"references"` in `shop.freezer.json` like below.
+
+```json
+{
+  "models": {
+    "shop": {
+      "name.!required": "My Fancy Shop",
+      "products.!as:product.!name:my_products": [
+        {
+          "name": "Chocolate",
+          "price": 5.99,
+          "country": "belgium"
+        }
+      ],
+      "manager": {
+        "id": 12345,
+        "name": "Jason"
+      }
+    }
+  },
+  "references": {
+    "manager": "./common",
+    "country": "./common/"
+  }
+}
+```
+
+You can see outputs like below if you run `dart run freezer:main`.
+
+```bash
+.
+├── design
+│   └── sample
+│       ├── common
+│       │   └── common.freezer.json
+│       └── shop.freezer.json
+└── lib
+    └── sample
+        ├── common
+        │   ├── country.dart
+        │   ├── manager.dart
+        │   ├── manager.freezed.dart
+        │   └── manager.g.dart
+        ├── product.dart
+        ├── product.freezed.dart
+        ├── product.g.dart
+        ├── shop.dart
+        ├── shop.freezed.dart
+        └── shop.g.dart
+```
+
+```dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import './common/manager.dart';
+import 'product.dart';
+
+part 'shop.freezed.dart';
+part 'shop.g.dart';
+
+@freezed
+class Shop with _$Shop {
+  const factory Shop({
+    required String name,
+    @JsonKey(name: 'products') List<Product>? myProducts,
+    Manager? manager,
+  }) = _Shop;
+
+  factory Shop.fromJson(Map<String, Object?> json) => _$ShopFromJson(json);
+}
+```
+
+```dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import './common/country.dart';
+
+part 'product.freezed.dart';
+part 'product.g.dart';
+
+@freezed
+class Product with _$Product {
+  const factory Product({
+    String? name,
+    double? price,
+    String? productType,
     Country? country,
   }) = _Product;
 
