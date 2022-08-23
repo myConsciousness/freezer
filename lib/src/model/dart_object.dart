@@ -16,7 +16,7 @@ class DartObject<E> {
     required this.fileName,
     required this.dartDoc,
     required this.className,
-    required this.importPackages,
+    required this.imports,
     required this.elements,
   });
 
@@ -25,7 +25,7 @@ class DartObject<E> {
     final String path,
     final String fileName,
     final String dartDoc,
-    final List<ImportPackage> importPackages,
+    final List<Import> imports,
     final List<E> elements,
   ) {
     final aliasFileName = identifier.resolveFileName(fileName);
@@ -36,7 +36,7 @@ class DartObject<E> {
       fileName: aliasFileName.toSnakeCase(),
       dartDoc: DartDoc.resolveFrom(dartDoc),
       className: aliasFileName.toUpperCamelCase(),
-      importPackages: importPackages,
+      imports: imports,
       elements: elements,
     );
   }
@@ -51,7 +51,7 @@ class DartObject<E> {
 
   final String className;
 
-  final List<ImportPackage> importPackages;
+  final List<Import> imports;
 
   final List<E> elements;
 

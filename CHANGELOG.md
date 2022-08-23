@@ -1,5 +1,10 @@
 # Release Note
 
+## v0.5.0
+
+- Supported external references for objects. You can specify external references by using JSON object `references`. ([#8](https://github.com/myConsciousness/freezer/issues/8))
+- Fixed a bug that JSON objects in Map structure were not converted to model objects.
+
 ## v0.4.0
 
 - Supported Enum generating and mapping from JSON file. ([#6](https://github.com/myConsciousness/freezer/issues/6))

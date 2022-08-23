@@ -16,6 +16,10 @@
           "country": "germany"
         }
       ],
+      "manager": {
+        "id": 12345,
+        "name": "Jason"
+      },
       "location": [-122.4194, 37.7749],
       "closed": false,
       "$name": "This is a comment for name field.",
@@ -36,7 +40,10 @@
         "value": 1
       }
     ],
-    "country": ["germany", "belgium"],
     "$$product_type": "This is a comment for product_type enum object."
+  },
+  "references": {
+    "manager": "./common",
+    "country": "./common/"
   }
 }

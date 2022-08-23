@@ -1,0 +1,11 @@
+{
+  "models": {
+    "manager": {
+      "id": 12345,
+      "name": "Jason"
+    }
+  },
+  "enums": {
+    "country": ["germany", "belgium"]
+  }
+}

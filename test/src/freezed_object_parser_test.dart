@@ -27,6 +27,7 @@ void main() {
           },
         },
         [],
+        [],
       ).execute();
 
       expect(actual.length, 2);
@@ -37,8 +38,8 @@ void main() {
       expect(shop.dartDoc.lines.isEmpty, isTrue);
       expect(shop.className, 'Shop');
 
-      expect(shop.importPackages.length, 1);
-      expect(shop.importPackages[0].name, 'product');
+      expect(shop.imports.length, 1);
+      expect(shop.imports[0].name, 'product');
 
       expect(shop.elements.length, 3);
       expect(shop.elements[0].hasDartDoc, isTrue);
@@ -76,6 +77,7 @@ void main() {
             "closed": false,
           }
         },
+        [],
         [],
       ).execute();
 

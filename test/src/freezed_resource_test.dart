@@ -61,7 +61,7 @@ class Test with _\$Test {
         'design/src',
         'test',
         '',
-        [ImportPackage.resolveFrom('params.!as:param')],
+        [Import.fromCurrent('params.!as:param')],
         [
           FreezedParameter.resolveFrom('', 'params.!as:param', [
             {'name': 'something'}
@@ -104,7 +104,7 @@ class Test with _\$Test {
         'design/src',
         'test',
         '',
-        [ImportPackage.resolveFrom('param')],
+        [Import.fromCurrent('param')],
         [
           FreezedParameter.resolveFrom('', 'param', {'name': 'something'})
         ],
@@ -146,7 +146,7 @@ class Test with _\$Test {
         'design/src',
         'test',
         '',
-        [ImportPackage.resolveFrom('param.!name:my_param')],
+        [Import.fromCurrent('param.!name:my_param')],
         [
           FreezedParameter.resolveFrom(
             '',
@@ -193,7 +193,7 @@ class Test with _\$Test {
         'design/src',
         'test',
         'Test description.',
-        [ImportPackage.resolveFrom('param')],
+        [Import.fromCurrent('param')],
         [
           FreezedParameter.resolveFrom(
             '',
@@ -240,7 +240,7 @@ class Test with _\$Test {
         'design/src',
         'test',
         '',
-        [ImportPackage.resolveFrom('param')],
+        [Import.fromCurrent('param')],
         [
           FreezedParameter.resolveFrom(
             'Test description.',
@@ -287,7 +287,7 @@ class Test with _\$Test {
         'design/src',
         'test',
         'Test description for class.',
-        [ImportPackage.resolveFrom('param')],
+        [Import.fromCurrent('param')],
         [
           FreezedParameter.resolveFrom(
             'Test description for field.',
@@ -335,7 +335,7 @@ class Test with _\$Test {
         'design/src',
         'test',
         '',
-        [ImportPackage.resolveFrom('param.!required')],
+        [Import.fromCurrent('param.!required')],
         [
           FreezedParameter.resolveFrom(
             '',

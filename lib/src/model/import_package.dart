@@ -5,14 +5,26 @@
 // Project imports:
 import '../extension/string_extension.dart';
 import '../policy/freezer_identifier.dart' as identifier;
+import 'reference.dart';
 
-class ImportPackage {
-  const ImportPackage._(this.name);
+class Import {
+  const Import._(this.path, this.name);
 
-  factory ImportPackage.resolveFrom(final String name) => ImportPackage._(
+  factory Import.fromCurrent(final String name) => Import._(
+        null,
         identifier.resolveFileName(name).toSnakeCase(),
       );
 
+  factory Import.fromExternal(final Reference reference) => Import._(
+        reference.path,
+        reference.name,
+      );
+
+  /// The path to the object
+  final String? path;
+
   /// The package name
   final String name;
+
+  bool get hasPath => path != null;
 }
