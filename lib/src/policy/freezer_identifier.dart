@@ -2,6 +2,12 @@
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided the conditions.
 
+bool isRequired(final String token) => token.contains('.!required');
+
+bool hasAliasFieldName(final String token) => token.contains('.!name:');
+
+bool isDateTime(final String token) => token.contains('.!toDateTime');
+
 String resolveOriginalName(final String token) {
   if (token.contains('.!')) {
     return token.split('.!')[0];

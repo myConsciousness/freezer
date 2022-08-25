@@ -22,6 +22,7 @@
       },
       "location": [-122.4194, 37.7749],
       "closed": false,
+      "since.!toDateTime": "",
       "$name": "This is a comment for name field.",
       "$products": "This is a comment for product field.",
       "$$products": "This is a comment for product object."

@@ -31,7 +31,7 @@ class FreezedParameter {
     if (value == null) {
       return FreezedParameter._(
         dartDoc: DartDoc.resolveFrom(dartDoc),
-        isRequired: _isRequired(key),
+        isRequired: identifier.isRequired(key),
         name: fieldName.toCamelCase(),
         type: fileName.toUpperCamelCase(),
         nested: false,
@@ -44,7 +44,7 @@ class FreezedParameter {
 
       return FreezedParameter._(
         dartDoc: DartDoc.resolveFrom(dartDoc),
-        isRequired: _isRequired(key),
+        isRequired: identifier.isRequired(key),
         name: fieldName.toCamelCase(),
         type: _isList(value) ? 'List' : fileName.toUpperCamelCase(),
         typeVariable: _isList(value) && nested
@@ -60,9 +60,11 @@ class FreezedParameter {
     //! For standard types
     return FreezedParameter._(
       dartDoc: DartDoc.resolveFrom(dartDoc),
-      isRequired: _isRequired(key),
+      isRequired: identifier.isRequired(key),
       name: fieldName.toCamelCase(),
-      type: value.runtimeType.toString(),
+      type: identifier.isDateTime(key)
+          ? 'DateTime'
+          : value.runtimeType.toString(),
       nested: false,
       annotation: annotation,
     );
@@ -96,10 +98,8 @@ class FreezedParameter {
 
   bool get hasDartDoc => dartDoc.lines.isNotEmpty;
 
-  static bool _isRequired(final String token) => token.contains('.!required');
-
   static String? _getJsonKeyAnnotation(final String key) {
-    if (key.contains('.!name:')) {
+    if (identifier.hasAliasFieldName(key)) {
       return "@JsonKey(name: '${identifier.resolveOriginalName(key)}')";
     }
 
