@@ -6,6 +6,8 @@ bool isRequired(final String token) => token.contains('.!required');
 
 bool hasAliasFieldName(final String token) => token.contains('.!name:');
 
+bool hasAliasEnumFieldName(final String token) => token.contains('.!field:');
+
 bool isDateTime(final String token) => token.contains('.!toDateTime');
 
 String resolveOriginalName(final String token) {
@@ -19,6 +21,8 @@ String resolveOriginalName(final String token) {
 String resolveFileName(final String token) => _resolveName('as', token);
 
 String resolveFieldName(final String token) => _resolveName('name', token);
+
+String resolveEnumFieldName(final String token) => _resolveName('field', token);
 
 bool isDartdoc(final String token) => token.startsWith('\$');
 

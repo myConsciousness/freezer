@@ -4,6 +4,7 @@
 
 - Supported to specify specific field as `DateTime` with `.!toDateTime` identifier. ([#34](https://github.com/myConsciousness/freezer/issues/34))
 - Fixed to add `@JsonValue` when value is specified in `enums` object in JSON file. ([#36](https://github.com/myConsciousness/freezer/issues/36))
+- Supported `.!field:` identifier for enum object. You can specify a name of enum field with specific value. ([#37](https://github.com/myConsciousness/freezer/issues/37))
 
 ## v0.5.0
 

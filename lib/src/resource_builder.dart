@@ -212,11 +212,14 @@ enum $className {
           buffer.writeln();
 
           buffer.writeln('/// The value of this enum element.');
-          buffer
-              .writeln('final ${element.value.runtimeType.toString()} value;');
+
+          final fieldName = _resolveFieldName();
+
+          buffer.writeln(
+              'final ${element.value.runtimeType.toString()} $fieldName;');
           buffer.writeln();
 
-          buffer.write('const $className(this.value);');
+          buffer.write('const $className(this.$fieldName);');
         } else {
           buffer.writeln(',');
         }
@@ -234,5 +237,13 @@ enum $className {
     }
 
     return value.toString();
+  }
+
+  String _resolveFieldName() {
+    if (enumObject.hasFieldName) {
+      return enumObject.fieldName;
+    }
+
+    return 'value';
   }
 }

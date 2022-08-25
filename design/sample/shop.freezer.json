@@ -29,7 +29,7 @@
     }
   },
   "enums": {
-    "product_type": [
+    "product_type.!field:code": [
       {
         "$": "It represents sweets.",
         "name": "sweet",
