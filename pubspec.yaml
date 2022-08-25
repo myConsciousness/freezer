@@ -1,8 +1,8 @@
 name: freezer
 description: >
-  Automatically generates object classes supported by the freezed library
-  directly from JSON files.
-version: 0.5.1
+  Provides the easiest and most productive automatic generation of
+  model objects from JSON files.
+version: 0.6.0
 repository: https://github.com/myConsciousness/freezer
 issue_tracker: https://github.com/myConsciousness/freezer/issues
 

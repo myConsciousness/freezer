@@ -10,6 +10,7 @@ class EnumElement {
     required this.dartDoc,
     required this.name,
     required this.value,
+    required this.annotation,
   });
 
   factory EnumElement.resolveFrom(
@@ -21,6 +22,7 @@ class EnumElement {
         dartDoc: DartDoc.resolveFrom(dartDoc),
         name: name,
         value: value,
+        annotation: _getAnnotation(value),
       );
 
   /// The dart document
@@ -32,7 +34,24 @@ class EnumElement {
   /// The element value
   final dynamic value;
 
+  /// The annotation
+  final String annotation;
+
   bool get hasDartDoc => dartDoc.lines.isNotEmpty;
 
   bool get hasValue => value != null;
+
+  bool get hasAnnotation => annotation.isNotEmpty;
+
+  static String _getAnnotation(dynamic value) {
+    if (value == null) {
+      return '';
+    }
+
+    if (value is String) {
+      return "@JsonValue('$value')";
+    }
+
+    return "@JsonValue($value)";
+  }
 }

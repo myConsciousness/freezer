@@ -534,11 +534,15 @@ For example, the `product_type` field of the `"products"` object in the `"models
 Then let's run the `dart run freezer:main` command using this example JSON! You can get following results.
 
 ```dart
+import 'package:json_annotation/json_annotation.dart';
+
 enum ProductType {
   /// It represents the sweet product.
+  @JsonValue(0)
   sweet(0),
 
   /// It represents the juice product.
+  @JsonValue(1)
   juice(1);
 
   /// The value of this enum element.

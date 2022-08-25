@@ -1,8 +1,9 @@
 # Release Note
 
-## v0.5.1
+## v0.6.0
 
 - Supported to specify specific field as `DateTime` with `.!toDateTime` identifier. ([#34](https://github.com/myConsciousness/freezer/issues/34))
+- Fixed to add `@JsonValue` when value is specified in `enums` object in JSON file. ([#36](https://github.com/myConsciousness/freezer/issues/36))
 
 ## v0.5.0
 

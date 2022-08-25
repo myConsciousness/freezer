@@ -153,6 +153,8 @@ class _EnumResourceBuilder implements ResourceBuilder {
     return '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+${_resolveImportPackages(elements.first)}
+
 // **************************************************************************
 // FreezerGenerator
 // **************************************************************************
@@ -163,6 +165,11 @@ enum $className {
 }
 ''';
   }
+
+  String _resolveImportPackages(final EnumElement element) =>
+      element.hasAnnotation
+          ? "import 'package:freezed_annotation/freezed_annotation.dart';"
+          : '';
 
   String _resolveClassDartDoc(final DartObject enumObject) {
     if (enumObject.hasDartDoc) {
@@ -187,6 +194,10 @@ enum $className {
       if (element.hasDartDoc) {
         buffer.writeDartDoc(element.dartDoc);
         buffer.writeln();
+      }
+
+      if (element.hasAnnotation) {
+        buffer.writeln(element.annotation);
       }
 
       buffer.write(element.name);
