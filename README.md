@@ -313,14 +313,15 @@ And you can see generated dart codes in the `.lib` folder like below.
 
 These identifiers can be used to automatically create classes and fields with names that differ from the field names defined in the JSON file without directly editing the model object source.
 
-| Identifier       | Description                                                                                   | Example                                                      |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **.!required**   | The field with this identifier shall be a required field.                                     | `name.!required`                                             |
-| **.!as:**        | Assign an alias to a specific object defined in JSON.                                         | `product.!as:my_product`                                     |
-| **.!name:**      | Assign an alias to a specific field in object defined in JSON.                                | `product.!name:my_product`                                   |
-| **.!toDateTime** | Treat this field as DateTime type.                                                            | `datetime.!toDateTime`                                       |
-| **$**            | A dartdoc can be created for a specific field by tying it to a field name defined in JSON.    | `"$field_name": "This is a comment for field."`              |
-| **$$**           | A dartdoc can be created for a specific object by tying it to an object name defined in JSON. | `"$$object_name": "This is a comment for a object (class)."` |
+| Identifier       | Description                                                                                     | Example                                                      |
+| ---------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **.!required**   | The field with this identifier shall be a required field.                                       | `name.!required`                                             |
+| **.!as:**        | Assign an alias to a specific object defined in JSON.                                           | `product.!as:my_product`                                     |
+| **.!name:**      | Assign an alias to a specific field in object defined in JSON.                                  | `product.!name:my_product`                                   |
+| **.!toDateTime** | Treat this field as DateTime type.                                                              | `datetime.!toDateTime`                                       |
+| **.!field:**     | Assign an alias to specific field in enum object with value. The default field name is `value`. | `product_type.!field:code`                                   |
+| **$**            | A dartdoc can be created for a specific field by tying it to a field name defined in JSON.      | `"$field_name": "This is a comment for field."`              |
+| **$$**           | A dartdoc can be created for a specific object by tying it to an object name defined in JSON.   | `"$$object_name": "This is a comment for a object (class)."` |
 
 Also, you can combine multiple identifiers for specific fields and objects like below.
 

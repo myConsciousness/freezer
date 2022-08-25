@@ -17,6 +17,7 @@ class DartObject<E> {
     required this.dartDoc,
     required this.className,
     required this.imports,
+    required this.fieldName,
     required this.elements,
   });
 
@@ -37,6 +38,9 @@ class DartObject<E> {
       dartDoc: DartDoc.resolveFrom(dartDoc),
       className: aliasFileName.toUpperCamelCase(),
       imports: imports,
+      fieldName: identifier.hasAliasEnumFieldName(fileName)
+          ? identifier.resolveEnumFieldName(fileName)
+          : '',
       elements: elements,
     );
   }
@@ -53,9 +57,13 @@ class DartObject<E> {
 
   final List<Import> imports;
 
+  final String fieldName;
+
   final List<E> elements;
 
   bool get hasDartDoc => dartDoc.lines.isNotEmpty;
+
+  bool get hasFieldName => fieldName.isNotEmpty;
 
   static String _resolveOutputPath(final String filePath) {
     return filePath
