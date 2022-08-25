@@ -1,5 +1,9 @@
 # Release Note
 
+## v0.5.1
+
+- Supported to specify specific field as `DateTime` with `.!toDateTime` identifier. ([#34](https://github.com/myConsciousness/freezer/issues/34))
+
 ## v0.5.0
 
 - Supported external references for objects. You can specify external references by using JSON object `references`. ([#8](https://github.com/myConsciousness/freezer/issues/8))

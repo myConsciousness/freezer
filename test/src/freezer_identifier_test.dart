@@ -9,6 +9,66 @@ import 'package:freezer/src/policy/freezer_identifier.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group('.isRequired', () {
+    test('with .!required identifier', () {
+      final actual = isRequired('test.!required');
+
+      expect(actual, isTrue);
+    });
+
+    test('without .!required identifier', () {
+      final actual = isRequired('test.!name:something');
+
+      expect(actual, isFalse);
+    });
+
+    test('complicated pattern', () {
+      final actual = isRequired('test.!name:something.!required');
+
+      expect(actual, isTrue);
+    });
+  });
+
+  group('.hasAliasFieldName', () {
+    test('with .!name: identifier', () {
+      final actual = hasAliasFieldName('test.!name:something');
+
+      expect(actual, isTrue);
+    });
+
+    test('without .!name: identifier', () {
+      final actual = hasAliasFieldName('test.!required');
+
+      expect(actual, isFalse);
+    });
+
+    test('complicated pattern', () {
+      final actual = hasAliasFieldName('test.!name:something.!toDateTime');
+
+      expect(actual, isTrue);
+    });
+  });
+
+  group('.isDateTime', () {
+    test('with .!toDateTime identifier', () {
+      final actual = isDateTime('test.!toDateTime');
+
+      expect(actual, isTrue);
+    });
+
+    test('without .!toDateTime identifier', () {
+      final actual = isDateTime('test.!name:something');
+
+      expect(actual, isFalse);
+    });
+
+    test('complicated pattern', () {
+      final actual = isDateTime('test.!name:something.!toDateTime');
+
+      expect(actual, isTrue);
+    });
+  });
+
   group('.resolveOriginalName', () {
     test('with .! identifier', () {
       final actual = resolveOriginalName('test.!name:tests');
