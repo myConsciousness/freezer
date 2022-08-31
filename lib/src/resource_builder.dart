@@ -92,6 +92,10 @@ class $className with _\$$className {
           return "import '${package.path}${package.name}.dart';";
         }
 
+        if (package.hasPackageReference) {
+          return "import '${package.path}';";
+        }
+
         return "import '${package.path}/${package.name}.dart';";
       }
 

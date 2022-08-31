@@ -27,4 +27,7 @@ class Import {
   final String name;
 
   bool get hasPath => path != null;
+
+  /// Whether [path] references an external package
+  bool get hasPackageReference => path?.startsWith('package:') ?? false;
 }
