@@ -29,7 +29,5 @@ class Import {
   bool get hasPath => path != null;
 
   /// Whether [path] references an external package
-  bool get pathReferencesPackage {
-    return path?.startsWith('package:') == true;
-  }
+  bool get hasPackageReference => path?.startsWith('package:') ?? false;
 }
