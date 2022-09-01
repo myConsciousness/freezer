@@ -2,7 +2,7 @@ name: freezer
 description: >
   Provides the easiest and most productive automatic generation of
   model objects from JSON files.
-version: 0.6.1
+version: 0.6.2
 repository: https://github.com/myConsciousness/freezer
 issue_tracker: https://github.com/myConsciousness/freezer/issues
 

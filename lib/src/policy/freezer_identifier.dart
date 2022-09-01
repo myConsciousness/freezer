@@ -4,7 +4,9 @@
 
 bool isRequired(final String token) => token.contains('.!required');
 
-bool hasAliasFieldName(final String token) => token.contains('.!name:');
+bool hasAliasFieldName(final String token) {
+  return token.contains('.!name:') || token.contains('_');
+}
 
 bool hasAliasEnumFieldName(final String token) => token.contains('.!field:');
 

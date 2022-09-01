@@ -1,5 +1,9 @@
 # Release Note
 
+## v0.6.2
+
+- Add `JsonKeys` for camel case fields. ([#44](https://github.com/myConsciousness/freezer/issues/44))
+
 ## v0.6.1
 
 - Support for external package references. ([#41](https://github.com/myConsciousness/freezer/issues/41))
