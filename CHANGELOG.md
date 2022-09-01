@@ -1,5 +1,9 @@
 # Release Note
 
+## v0.6.1
+
+- Support for external package references. ([#41](https://github.com/myConsciousness/freezer/issues/41))
+
 ## v0.6.0
 
 - Supported to specify specific field as `DateTime` with `.!toDateTime` identifier. ([#34](https://github.com/myConsciousness/freezer/issues/34))
