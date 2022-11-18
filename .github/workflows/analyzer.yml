@@ -15,7 +15,7 @@ jobs:
     name: analyzer
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3.1.0
     - uses: dart-lang/setup-dart@v1
     - name: install dependencies
       run: dart pub get
